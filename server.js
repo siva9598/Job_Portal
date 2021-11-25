@@ -23,9 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 //   });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to job_portal application." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to job_portal application." });
+// });
 
 const path = require('path')
 // Serve static files from the React frontend app
