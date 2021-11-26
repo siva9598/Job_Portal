@@ -22,10 +22,10 @@ db.sequelize.sync();
 //     console.log("Drop and re-sync db.");
 //   });
 
-// simple route
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to job_portal application." });
-// });
+//test api
+app.get("/testapi", (req, res) => {
+  res.json({ message: "hello world" });
+});
 
 const path = require('path')
 // Serve static files from the React frontend app

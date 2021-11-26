@@ -2,13 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [testVar, setTestVar] = useState('')
+  fetchTestVar = async () => {
+    const response = await fetch(`/testapi`)
+    const t = await response.json()
+    console.log(`t is ${t}`)
+    const value = t.message
+    setTestVar(value)
+  }
   return (
     <div className="App">
+      console.log(data);
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        fetchTestVar()
+        <p>data: {testVar}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
