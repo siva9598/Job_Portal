@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -9,8 +9,12 @@ function App() {
     const t = await response.json()
     console.log(`t is ${t}`)
     const value = t.message
+    console.log(`value is ${value}`)
     setTestVar(value)
   }
+  useEffect(()=> {
+    fetchTestVar()
+  },[]);
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +22,6 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        {fetchTestVar()}
         <p>data: {testVar}</p>
         <a
           className="App-link"
