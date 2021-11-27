@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Job = sequelize.define("job", {
+    const job = sequelize.define("job", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true
@@ -21,5 +21,5 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
-    return Job;
+    return job;
   };
