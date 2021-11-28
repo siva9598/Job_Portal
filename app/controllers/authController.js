@@ -26,10 +26,6 @@ exports.signUp = (req, res) => {
     
   };
   
-  exports.signIn = (req,res) => {
-    const user = User.findOne()
-    const user = await User.findOne({ where: { email: req.body.email } });
-  }
 
   exports.signIn = (req,res) => {
     const { email, password } = req.body
