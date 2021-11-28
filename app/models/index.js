@@ -26,5 +26,20 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
+db.recuiter = require("../models/recuiter.model.js")(sequelize, Sequelize);
+db.job = require("../models/job.model.js")(sequelize, Sequelize);
+db.application = require("../models/application.model.js")(sequelize, Sequelize);
+
+db.user.hasOne(db.recuiter);
+db.recuiter.belongsTo(db.user);
+
+db.user.hasMany(db.application);
+db.application.belongsTo(db.user);
+
+db.application.belongsTo(db.job);
+db.job.hasMany(db.application);
+
+db.job.belongsTo(db.recuiter);
+db.recuiter.hasMany(db.job);
 
 module.exports = db;
