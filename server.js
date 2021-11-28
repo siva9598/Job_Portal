@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-
+const authRoutes = require("./app/routes/auth.routes");
 const app = express();
+const bodyParser = require("body-parser");
 
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -10,15 +11,16 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
+//app.use(express.json());
 app.use(express.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
+app.use("/api/auth", authRoutes);
 const db = require("./app/models");
-db.sequelize.sync({
-  force: true,
-});
+// db.sequelize.sync({
+//   force: true
+// });
+db.sequelize.sync();
 
 // db.sequelize.sync({ force: true }).then(() => {
 //     console.log("Drop and re-sync db.");
@@ -26,6 +28,11 @@ db.sequelize.sync({
 
 //test api
 app.get("/testapi", (req, res) => {
+  res.json({ message: "hello world" });
+});
+app.post("/testapi2", async (req, res) => {
+  console.log(Object.getOwnPropertyNames(req.body));
+  console.log(`body :${req.body}`);
   res.json({ message: "hello world" });
 });
 
