@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const controller = require("../controllers/authController");
+
 router.post(
   "/signup",
   // [
@@ -12,3 +13,4 @@ router.post(
 );
 router.post("/signin", controller.signIn);
 module.exports = router;
+
