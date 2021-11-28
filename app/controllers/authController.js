@@ -13,7 +13,8 @@ exports.signUp = (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    phone_number: req.body.phone_number
     
   }.then(() => {res.send({ message: "User was registered successfully!" });})
   )   
