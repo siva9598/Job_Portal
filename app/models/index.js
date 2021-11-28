@@ -8,8 +8,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle
-  }
+    idle: dbConfig.pool.idle,
+  },
 });
 
 const db = {};
@@ -20,15 +20,18 @@ db.sequelize = sequelize;
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
   });
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.recuiter = require("../models/recuiter.model.js")(sequelize, Sequelize);
 db.job = require("../models/job.model.js")(sequelize, Sequelize);
-db.application = require("../models/application.model.js")(sequelize, Sequelize);
+db.application = require("../models/application.model.js")(
+  sequelize,
+  Sequelize
+);
 
 db.user.hasOne(db.recuiter);
 db.recuiter.belongsTo(db.user);

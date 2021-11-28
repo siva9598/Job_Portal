@@ -10,16 +10,15 @@ var bcrypt = require("bcryptjs");
 
 exports.signUp = (req, res) => {
   // Save User to Database
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-    
-  }.then(() => {res.send({ message: "User was registered successfully!" });})
-  )   
-    .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-    
-  };
-  
+  User.create(
+    {
+      username: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+    }.then(() => {
+      res.send({ message: "User was registered successfully!" });
+    })
+  ).catch((err) => {
+    res.status(500).send({ message: err.message });
+  });
+};
