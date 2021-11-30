@@ -22,7 +22,7 @@ exports.signUp = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
       phone_number: req.body.phone_number,
     })
-      .then((user) => res.status(201).send(user))
+      .then((user) => res.status(201).send("User created successfully"))
       .catch((error) => {
         console.log(error);
         res.status(400).send(error);
@@ -49,8 +49,27 @@ exports.signIn = async (req, res) => {
       JWT_SECRET
     );
 
-    return res.json({ status: "ok", data: token });
+    return res.json({ status: "ok", user_token: token, user_id: user.id });
   }
 
   res.json({ status: "error", error: "Invalid username/password" });
+};
+
+exports.createRecuiter = async (req, res) => {
+  const user_id = req.params.user_id;
+  const user = await User.findOne({ where: { id: user_id } });
+  if (!req.body.company_name || !req.body.company_email) {
+    res.status(400).send({
+      msg: "Please enter company email and company name.",
+    });
+  }
+  Recuiter.create({
+    company_name: req.body.company_name,
+    company_email: req.body.company_email,
+  })
+    .then((recuiter) => res.status(201).send("Recuiter created successfully"))
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send(error);
+    });
 };
