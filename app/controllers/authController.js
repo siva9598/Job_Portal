@@ -1,7 +1,7 @@
 const db = require("../models");
 //const config = require("../config/auth.config");
 const User = db.user;
-const Role = db.role;
+const Recuiter = db.recuiter;
 
 const Op = db.Sequelize.Op;
 
@@ -67,7 +67,7 @@ exports.createRecuiter = async (req, res) => {
     company_name: req.body.company_name,
     company_email: req.body.company_email,
   })
-    .then((recuiter) => res.status(201).send("Recuiter created successfully"))
+    .then((recuiter) => res.json({ status: "ok", recuiter_id: recuiter.id }))
     .catch((error) => {
       console.log(error);
       res.status(400).send(error);
