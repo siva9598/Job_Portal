@@ -4,13 +4,14 @@ module.exports = (sequelize, Sequelize) => {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     company_name: {
       type: Sequelize.STRING,
     },
-    company_email: {
-      type: Sequelize.STRING,
-    },
+    // company_email: {
+    //   type: Sequelize.STRING,
+    // },
     is_verified: {
       type: Sequelize.BOOLEAN,
       default: false,
