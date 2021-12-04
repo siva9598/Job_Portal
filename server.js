@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./app/routes/auth.routes");
+const jobRoutes = require("./app/routes/job.routes");
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -16,9 +17,10 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
+app.use("/api", jobRoutes);
 const db = require("./app/models");
 // db.sequelize.sync({
-//   force: true
+//   force: true,
 // });
 db.sequelize.sync();
 
