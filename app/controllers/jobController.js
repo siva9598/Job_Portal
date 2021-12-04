@@ -28,51 +28,66 @@ exports.createJob = async (req, res) => {
   }
 };
 exports.changeJobstatus = async (req, res) => {
-  if (!req.body.job_id || !req.body.status) {
+  console.log(req.body.job_id);
+  console.log(req.body.status);
+
+  if (typeof req.body.job_id === "undefined" || !req.body.status) {
     {
       res.status(400).send({
-        msg: "Please send the valid data for creattion",
+        msg: "Please send the valid data",
       });
     }
   } else {
-    await Job.update(
+    Job.update(
       { status: req.body.status },
       {
         where: {
           id: req.body.job_id,
         },
       }
-    );
+    )
+      .then(() => res.status(200).send("Job updated successfully"))
+      .catch((err) => {
+        res.status(400).send(err.message);
+      });
   }
 };
 
 exports.getAllJobs = async (req, res) => {
-  const jobs = await Jobs.findAll();
+  const jobs = await Job.findAll();
   return res.json(jobs);
 };
 exports.applyForJob = async (req, res) => {
-  if (!req.body.job_id || !req.body.user_id) {
+  console.log(req.body.job_id);
+  console.log(req.userId);
+  if (typeof req.body.job_id === "undefined" || !req.userId) {
     {
       res.status(400).send({
         msg: "Invalid request",
       });
     }
   } else {
+    // add check if the user has already applied for the same job
     Application.create({
       status: "Applied",
-      userId: req.body.user_id,
+      userId: req.userId,
       jobId: req.body.job_id,
-    });
+    })
+      .then(() => res.status(200).send("Job application created successfully"))
+      .catch((err) => {
+        console.log(err.errors);
+        res.status(400).send(err.message);
+      });
   }
 };
 exports.getAllApplicants = async (req, res) => {
-  if (!req.body.job_id) {
+  if (!req.query.job_id) {
     res.status(400).send({
       msg: "Invalid request",
     });
   } else {
     const applicants = await Application.findOne({
-      where: { jobId: req.body.job_id },
+      where: { jobId: req.query.job_id },
     });
     return res.json(applicants);
   }

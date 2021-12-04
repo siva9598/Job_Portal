@@ -59,17 +59,18 @@ exports.createRecuiter = async (req, res) => {
   //console.log("im here");
   const user_id = req.userId;
   const user = await User.findOne({ where: { id: user_id } });
-  //if (!req.body.company_name || !req.body.company_email) {
-  if (!req.body.company_name) {
+  if (!req.body.company_name || !req.body.company_email) {
+    //if (!req.body.company_name) {
     res.status(400).send({
       msg: "Please enter company email and company name.",
     });
   }
-  //console.log(`emial: ${req.body.company_email}`);
+  console.log(`emial: ${req.body.company_email}`);
   Recuiter.create({
     company_name: req.body.company_name,
-    //company_email: req.body.company_email,
+    company_email: req.body.company_email,
     userId: user.id,
+    is_verified: false,
   })
     .then((recuiter) => res.json({ status: "ok", recuiter_id: recuiter.id }))
     .catch((error) => {
