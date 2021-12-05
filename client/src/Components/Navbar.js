@@ -1,17 +1,19 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
 import { Navbar, Nav, Container, NavItem, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import "./Navbar.css";
 const TopNav = () => {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Container>
-        <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/profile">Profile</Nav.Link>
-          <Nav.Link href="/applications">Applications</Nav.Link>
-        </Nav>
-      </Container>
+    <Navbar className="navbar-top">
+      <Navbar.Brand href="/">Instapply</Navbar.Brand>
+      <Nav className="me-auto" id="nav-elements">
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/profile">Profile</Nav.Link>
+        <Nav.Link href="/applications">Applications</Nav.Link>
+        <Button className="signout" variant="dark">
+          Signout
+        </Button>
+      </Nav>
     </Navbar>
   );
 };
