@@ -22,7 +22,11 @@ const db = require("./app/models");
 // db.sequelize.sync({
 //   force: true,
 // });
-db.sequelize.sync();
+try {
+  db.sequelize.sync();
+} catch (err) {
+  throw err;
+}
 
 // db.sequelize.sync({ force: true }).then(() => {
 //     console.log("Drop and re-sync db.");

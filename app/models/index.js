@@ -28,6 +28,10 @@ sequelize
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.recuiter = require("../models/recuiter.model.js")(sequelize, Sequelize);
 db.job = require("../models/job.model.js")(sequelize, Sequelize);
+db.user_profile = require("../models/user_profile.model.js")(
+  sequelize,
+  Sequelize
+);
 db.application = require("../models/application.model.js")(
   sequelize,
   Sequelize
@@ -44,5 +48,8 @@ db.job.hasMany(db.application);
 
 db.job.belongsTo(db.recuiter);
 db.recuiter.hasMany(db.job);
+
+db.user.hasOne(db.user_profile);
+db.user_profile.belongsTo(db.user);
 
 module.exports = db;
