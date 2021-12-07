@@ -4,6 +4,7 @@ const authRoutes = require("./app/routes/auth.routes");
 const jobRoutes = require("./app/routes/job.routes");
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -14,6 +15,7 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 //app.use(express.json());
 app.use(express.json());
+app.use(cookieParser());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
