@@ -48,6 +48,7 @@ exports.signIn = async (req, res) => {
       },
       authconfig.JWT_SECRET
     );
+    res.cookie("user_token", token, { expire: new Date() + 9999 });
 
     return res.json({ status: "ok", user_token: token, user_id: user.id });
   }
