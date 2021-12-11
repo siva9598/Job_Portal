@@ -13,7 +13,7 @@ var bcrypt = require("bcryptjs");
 exports.signUp = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     res.status(400).send({
-      msg: "Please enter email and password.",
+      message: "Please enter email and password.",
     });
   } else {
     User.create({
@@ -32,6 +32,7 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password);
   const user = await User.findOne({ where: { email: email } });
 
   if (!user) {
@@ -53,7 +54,7 @@ exports.signIn = async (req, res) => {
     return res.json({ status: "ok", user_token: token, user_id: user.id });
   }
 
-  res.json({ status: "error", error: "Invalid username/password" });
+  return res.json({ status: "error", error: "Invalid username/password" });
 };
 
 exports.createRecuiter = async (req, res) => {

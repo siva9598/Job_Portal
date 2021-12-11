@@ -1,114 +1,68 @@
-import React, { useState } from "react";
-import Base from "../Components/Base";
-import { Link, Redirect } from "react-router-dom";
-import { signin, authenticate, isAuthenticated } from "../Helpers/AuthHelper";
-
-const Signin = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    error: "",
-    loading: false,
-    didRedirect: false,
-  });
-  const { email, password, error, loading, didRedirect } = values;
-  const { user } = isAuthenticated();
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, error: false, [name]: event.target.value });
+import React, { Fragment, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, userSelector, clearState } from "../Features/UserSlice";
+import toast from "react-hot-toast";
+import { useHistory } from "react-router-dom";
+const Signin = ({}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { register, errors, handleSubmit } = useForm();
+  const { isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
+  const onSubmit = (data) => {
+    dispatch(loginUser(data));
   };
-  const loadingMessage = () => {
-    return (
-      loading && (
-        <div className="alert alert-info">
-          <h2>Loading...</h2>
-        </div>
-      )
-    );
-  };
-  const errorMessage = () => {
-    return (
-      <div
-        className="alert alert-danger"
-        style={{ display: error ? "" : "none" }}
-      >
-        {error}
-      </div>
-    );
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    console.log(values);
-    setValues({ ...values, error: false, loading: true });
-    signin({ email, password })
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
-        } else {
-          authenticate(data, () => {
-            setValues({
-              ...values,
-              didRedirect: true,
-            });
-          });
-        }
-      })
-      .catch(console.log("sign in failed"));
-  };
-
-  const performRedirect = () => {
-    if (didRedirect) {
-      if (user && user.role === 1) {
-        return <Redirect to="/admin/dashboard" />;
-      } else {
-        return <Redirect to="/user/dashboard" />;
-      }
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+  useEffect(() => {
+    if (isError) {
+      toast.error(errorMessage);
+      dispatch(clearState());
     }
-    if (isAuthenticated()) {
-      return <Redirect to="/" />;
+    if (isSuccess) {
+      dispatch(clearState());
+      history.push("/");
     }
-  };
-
-  const signInForm = () => {
-    return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <form>
-            <div className="form-group">
-              <label className="text-light">Email</label>
-              <input
-                onChange={handleChange("email")}
-                value={email}
-                className="form-control"
-                type="email"
-              />
-            </div>
-            <div className="form-group">
-              <label className="text-light">Password</label>
-              <input
-                value={password}
-                className="form-control"
-                onChange={handleChange("password")}
-                type="password"
-              />
-            </div>
-            <button onClick={onSubmit} className="btn btn-success btn-block">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  };
+  }, [isError, isSuccess]);
   return (
-    <Base title="Sign in page">
-      {loadingMessage()}
-      {errorMessage()}
-      {signInForm()}
-      {performRedirect()}
-      <p className="text-white text-center">{JSON.stringify(values)}</p>
-    </Base>
+    <Fragment>
+      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form
+              className="space-y-6"
+              onSubmit={handleSubmit(onSubmit)}
+              method="POST"
+            >
+              <label htmlFor="email">Email</label>
+              <input {...register("email")} />
+              <label htmlFor="password">Password</label>
+              <input type="password" {...register("password")} />
+              <button type="submit">Submit</button>
+            </form>
+            <div class="mt-6">
+              <div class="relative">
+                <div class="relative flex justify-center text-sm">
+                  <span class="px-2 bg-white text-gray-500">
+                    Or <Link to="signup"> Signup</Link>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 };
-
 export default Signin;
