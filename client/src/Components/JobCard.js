@@ -10,7 +10,7 @@ const JobCard = (props) => {
           <img src={companyLogo} alt="company logo" height="90%" />
         </div>
         <div className="job-details">
-          <h6>props.position</h6>
+          <h6>{props.position}</h6>
           <h6>props.location</h6>
           <h6>props.no_of_applicants</h6>
         </div>
