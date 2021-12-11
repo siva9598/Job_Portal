@@ -1,124 +1,74 @@
-import React, { useState } from "react";
-import Base from "../Components/Base";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { signup } from "../Helpers/AuthHelper";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { signupUser, userSelector, clearState } from "../Features/UserSlice";
+import { useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const SignUp = () => {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    phone_number: "",
-    password: "",
-    success: false,
-    error: "",
-  });
-  const { name, email, phone_number, password, error, success } = values;
-
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, error: false, [name]: event.target.value });
+const Signup = () => {
+  const dispatch = useDispatch();
+  const { register, errors, handleSubmit } = useForm();
+  const history = useHistory();
+  const { isFetching, isSuccess, isError, errorMessage } =
+    useSelector(userSelector);
+  const onSubmit = (data) => {
+    dispatch(signupUser(data));
   };
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setValues({ ...values, error: false });
-    signup({ name, email, password, phone_number })
-      .then((data) => {
-        if (data.error) {
-          setValues({ ...values, error: error, success: false });
-        } else {
-          setValues({
-            ...values,
-            name: "",
-            email: "",
-            password: "",
-            phone_number: "",
-            error: "",
-            success: true,
-          });
-        }
-      })
-      .catch((err) => console.log("error in signup"));
-  };
-
-  const signUpForm = () => {
-    return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <form>
-            <div className="form-group">
-              <label className="text-dark">Name</label>
-              <input
-                className="form-control"
-                onChange={handleChange("name")}
-                type="text"
-                value={name}
-              />
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearState());
+      history.push("/");
+    }
+    if (isError) {
+      toast.error(errorMessage);
+      dispatch(clearState());
+    }
+  }, [isSuccess, isError]);
+  return (
+    <Fragment>
+      <button className="btn-warning">warning</button>
+      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign Up to your account
+          </h2>
+        </div>
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form
+              className="space-y-6"
+              onSubmit={handleSubmit(onSubmit)}
+              method="POST"
+            >
+              <label htmlFor="username">Username</label>
+              <input {...register("username")} />
+              <label htmlFor="email">Email</label>
+              <input {...register("email")} />
+              <label htmlFor="phone_number">Phone number</label>
+              <input {...register("phone_number")} />
+              <label htmlFor="password">Password</label>
+              <input type="password" {...register("password")} />
+              <button type="submit">Submit</button>
+            </form>
+            <div class="mt-6">
+              <div class="relative">
+                <div class="relative flex justify-center text-sm">
+                  <span class="px-2 bg-white text-gray-500">
+                    Or <Link to="signin"> Login</Link>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="form-group">
-              <label className="text-dark">Email</label>
-              <input
-                className="form-control"
-                onChange={handleChange("email")}
-                type="email"
-                value={email}
-              />
-            </div>
-            <div className="form-group">
-              <label className="text-dark">Phone Number</label>
-              <input
-                className="form-control"
-                onChange={handleChange("phone_number")}
-                type="text"
-                value={phone_number}
-              />
-            </div>
-            <div className="form-group">
-              <label className="text-dark">Password</label>
-              <input
-                className="form-control"
-                onChange={handleChange("password")}
-                type="password"
-                value={password}
-              />
-            </div>
-            <button onClick={onSubmit} className="btn btn-success btn-block">
-              Submit
-            </button>
-          </form>
+          </div>
         </div>
       </div>
-    );
-  };
-
-  const successMessage = () => {
-    return (
-      <div
-        className="alert alert-success"
-        style={{ display: success ? "" : "none" }}
-      >
-        New account was created successfully.Please{" "}
-        <Link to="/signin">Login here</Link>
-      </div>
-    );
-  };
-  const errorMessage = () => {
-    return (
-      <div
-        className="alert alert-danger"
-        style={{ display: error ? "" : "none" }}
-      >
-        {error}
-      </div>
-    );
-  };
-
-  return (
-    <Base title="Sign up page">
-      {successMessage()}
-      {errorMessage()}
-      {signUpForm()}
-      <p className="text-white text-center">{JSON.stringify(values)}</p>
-    </Base>
+    </Fragment>
   );
 };
-
-export default SignUp;
+export default Signup;
