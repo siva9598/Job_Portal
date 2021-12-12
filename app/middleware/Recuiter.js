@@ -17,4 +17,9 @@ verifyRecuiter = (req, res, next) => {
   next();
 };
 
+// const checkRecuiter = {
+//   verifyRecuiter: verifyRecuiter,
+// };
+
+// module.exports = checkRecuiter;
 module.exports = verifyRecuiter;
