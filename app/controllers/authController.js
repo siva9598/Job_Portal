@@ -61,6 +61,9 @@ exports.createRecuiter = async (req, res) => {
   //console.log("im here");
   const user_id = req.userId;
   const user = await User.findOne({ where: { id: user_id } });
+  if (!user) {
+    return res.json({ status: "error", error: `User doesn't exist` });
+  }
   if (!req.body.company_name || !req.body.company_email) {
     //if (!req.body.company_name) {
     res.status(400).send({

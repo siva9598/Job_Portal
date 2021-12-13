@@ -1,3 +1,4 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const createRecuiter = createAsyncThunk(
   "recuiters/createRecuiter",
   async ({ company_name, company_email }, thunkAPI) => {
@@ -20,8 +21,7 @@ export const createRecuiter = createAsyncThunk(
       let data = response.json();
       console.log("data", data);
       console.log("hlllo");
-      if (response.status === 201) {
-        console.log("201");
+      if (response.status === 201 || response.status === 200) {
         // localStorage.setItem("token", data.token);
         return { ...data };
       } else {
@@ -76,3 +76,5 @@ export const recuiterSlice = createSlice({
     },
   },
 });
+export const { clearState } = recuiterSlice.actions;
+export const recuiterSelector = (state) => state.recuiter;

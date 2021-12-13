@@ -9,6 +9,8 @@ import SignIn from "./Pages/SignIn";
 import Profile from "./Pages/Profile";
 import Applications from "./Pages/Applications";
 import ApplyForJob from "./Pages/ApplyForJob";
+import RecuiterDashboard from "./Pages/RecuiterDashboard";
+import RecuiterSignup from "./Pages/RecuiterSignup";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -22,6 +24,12 @@ function App() {
           <Route path="/profile" exact component={Profile} />
           <Route path="/applications" exact component={Applications} />
           <Route path="/job/apply" exact component={ApplyForJob} />
+          <Route
+            path="/recuiter/dashboard"
+            exact
+            component={RecuiterDashboard}
+          />
+          <Route path="/recuiter/signup" exact component={RecuiterSignup} />
         </Switch>
       </BrowserRouter>
     </Provider>

@@ -1,8 +1,15 @@
 import React from "react";
-import { userSelector } from "../Features/UserSlice";
+import { recuiterSelector } from "../Features/RecuiterSlice";
+import TopNav from "../Components/Navbar";
+import Base from "../Components/Base";
+import JobCard from "../Components/JobCard";
+import { useSelector, useDispatch } from "react-redux";
+import JobResultsBanner from "../Components/JobResultsBanner";
+import { getAllJobs } from "../Helpers/JobHelper";
 const RecuiterDashboard = () => {
   const { isFetching, isSuccess, isError, errorMessage } =
-    useSelector(userSelector);
+    useSelector(recuiterSelector);
+
   return (
     <Base title="Homepage">
       <JobResultsBanner />
@@ -13,7 +20,7 @@ const RecuiterDashboard = () => {
       no_of_applicants="1"
     /> */}
 
-      <div className="row">
+      {/* <div className="row">
         {jobs.map((job, index) => {
           return (
             <JobCard
@@ -23,7 +30,7 @@ const RecuiterDashboard = () => {
             />
           );
         })}
-      </div>
+      </div> */}
     </Base>
   );
 };
