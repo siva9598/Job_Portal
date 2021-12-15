@@ -2,7 +2,15 @@ import React from "react";
 import companyLogo from "./company_logo.jpeg";
 import "./JobCard.css";
 import { Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 const JobCard = (props) => {
+  const applyForJob = (job_id) => {
+    return <Redirect to="/apply_for_job/job_id" />;
+  };
+  const getApplicantsOfJob = (job_id) => {
+    console.log("show aplicants");
+    return <Redirect to="/get_applicants/job_id" />;
+  };
   return (
     <div className="job-card-exterior">
       <div className="job-card">
@@ -16,8 +24,22 @@ const JobCard = (props) => {
         </div>
         {props.usecase === "application_listing" ? (
           <h6>props.status</h6>
+        ) : props.usecase === "user_listing" ? (
+          <Button
+            className="btn btn-primary apply-button"
+            onClick={applyForJob}
+          >
+            Apply
+          </Button>
+        ) : props.usecase === "recuiter_dashboard_listing" ? (
+          <Button
+            className="btn btn-primary apply-button"
+            onClick={getApplicantsOfJob}
+          >
+            Get Applicants
+          </Button>
         ) : (
-          <Button className="btn btn-primary apply-button">apply</Button>
+          <Button>default</Button>
         )}
       </div>
     </div>

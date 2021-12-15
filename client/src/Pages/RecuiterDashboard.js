@@ -44,6 +44,7 @@ const RecuiterDashboard = () => {
               position={recuiterJobs[index].position}
               location={recuiterJobs[index].location}
               no_of_applicants={recuiterJobs[index].no_of_applicants}
+              usecase="recuiter_dashboard_listing"
             />
           );
         })}
