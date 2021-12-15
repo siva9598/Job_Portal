@@ -92,3 +92,11 @@ exports.getAllApplicants = async (req, res) => {
     return res.json(applicants);
   }
 };
+
+exports.getAllJobsForRecuiter = async (req, res) => {
+  console.log(req.recuiterId);
+  const jobs = await Job.findAll({
+    where: { recuiterId: req.recuiterId },
+  });
+  return res.json(jobs);
+};

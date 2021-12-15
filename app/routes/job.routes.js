@@ -26,4 +26,10 @@ router.get(
   verifyRecuiter,
   controller.getAllApplicants
 );
+router.get(
+  "/recuiter/jobs",
+  auth.verifyToken,
+  verifyRecuiter,
+  controller.getAllJobsForRecuiter
+);
 module.exports = router;

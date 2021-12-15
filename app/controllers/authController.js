@@ -83,3 +83,8 @@ exports.createRecuiter = async (req, res) => {
       res.status(400).send(error);
     });
 };
+
+exports.getRecuiterId = async (req, res) => {
+  console.log(req.recuiterId);
+  return res.status(200).send({ recuiter_id: req.recuiterId });
+};

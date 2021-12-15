@@ -11,6 +11,7 @@ import Applications from "./Pages/Applications";
 import ApplyForJob from "./Pages/ApplyForJob";
 import RecuiterDashboard from "./Pages/RecuiterDashboard";
 import RecuiterSignup from "./Pages/RecuiterSignup";
+import RecuiterAddJob from "./Pages/RecuiterAddJob";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             component={RecuiterDashboard}
           />
           <Route path="/recuiter/signup" exact component={RecuiterSignup} />
+          <Route path="/recuiter/add/job" exact component={RecuiterAddJob} />
         </Switch>
       </BrowserRouter>
     </Provider>
