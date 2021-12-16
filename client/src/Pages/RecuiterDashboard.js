@@ -29,18 +29,11 @@ const RecuiterDashboard = () => {
   return (
     <Base title="Homepage">
       <JobResultsBanner />
-      {/* <h1>{recuiterSelector}</h1> */}
-      {/* <JobCard position="SDET1" location="Banglaore" no_of_applicants="1" />
-    <JobCard
-      position={jobs[0].position}
-      location="Banglaore"
-      no_of_applicants="1"
-    /> */}
-
       <div className="row">
         {recuiterJobs.map((job, index) => {
           return (
             <JobCard
+              job_id={index}
               position={recuiterJobs[index].position}
               location={recuiterJobs[index].location}
               no_of_applicants={recuiterJobs[index].no_of_applicants}

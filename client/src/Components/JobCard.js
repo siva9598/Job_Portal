@@ -2,14 +2,19 @@ import React from "react";
 import companyLogo from "./company_logo.jpeg";
 import "./JobCard.css";
 import { Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const JobCard = (props) => {
-  const applyForJob = (job_id) => {
-    return <Redirect to="/apply_for_job/job_id" />;
+  console.log(props.id);
+  let history = useHistory();
+  let path_to_redirect = `/`;
+  const applyForJob = () => {
+    path_to_redirect = `/job/${props.job_id}/apply_for_job`;
+    history.push(path_to_redirect);
   };
-  const getApplicantsOfJob = (job_id) => {
-    console.log("show aplicants");
-    return <Redirect to="/get_applicants/job_id" />;
+  const getApplicantsOfJob = () => {
+    console.log(props.job_id);
+    path_to_redirect = `/job/${props.job_id}/applicants`;
+    history.push(path_to_redirect);
   };
   return (
     <div className="job-card-exterior">

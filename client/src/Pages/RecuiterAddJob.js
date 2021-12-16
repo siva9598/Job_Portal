@@ -24,7 +24,6 @@ const RecuiterAddJob = () => {
     dispatch(fetchRecuiterId());
   }, []);
   const { recuiter_id } = useSelector(recuiterSelector);
-  console.log(recuiter_id);
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
