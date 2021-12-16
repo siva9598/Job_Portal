@@ -3,18 +3,19 @@ const app = express();
 const router = express.Router();
 const controller = require("../controllers/jobController");
 const auth = require("../middleware/authJWT");
-const recuiter_middleware = require("../middleware/Recuiter");
+const verifyRecuiter = require("../middleware/Recuiter");
 
 router.post(
   "/job/create",
-  //auth.verifyToken,
-  //recuiter_middleware.verifyRecuiter,
+  auth.verifyToken,
+  verifyRecuiter,
   controller.createJob
 );
 router.patch(
   "/job/change_status",
   auth.verifyToken,
-  //recuiter_middleware.verifyRecuiter,
+  // recuiter_middleware.verifyRecuiter,
+  verifyRecuiter,
   controller.changeJobstatus
 );
 router.get("/jobs", auth.verifyToken, controller.getAllJobs);
@@ -22,7 +23,13 @@ router.post("/job/apply", auth.verifyToken, controller.applyForJob);
 router.get(
   "/applicants",
   auth.verifyToken,
-  //.verifyRecuiter,
+  verifyRecuiter,
   controller.getAllApplicants
+);
+router.get(
+  "/recuiter/jobs",
+  auth.verifyToken,
+  verifyRecuiter,
+  controller.getAllJobsForRecuiter
 );
 module.exports = router;
