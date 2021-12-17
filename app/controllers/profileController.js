@@ -29,17 +29,22 @@ exports.createUserProfile = async (req, res) => {
 exports.getUserProfile = async (req, res) => {
   const user_id = req.userId;
   console.log("user id: " + user_id);
-  await UserProfile.findOne({
+  const user_profile = await UserProfile.findOne({
     where: {
       userId: user_id,
     },
-  })
-    .then((user_profile) => {
-      return res.json(user_profile);
-    })
-    .catch((err) => {
-      res.status(400).send(err.message);
-    });
+  });
+  // .then((user_profile) => {
+  //   return res.json(user_profile);
+  // })
+  // .catch((err) => {
+  //   res.status(400).send(err.message);
+  // });
+  if (!user_profile) {
+    return res.json({ status: "error", error: `User profile doesn't exist` });
+  } else {
+    return res.json(user_profile);
+  }
 };
 
 exports.changeUserProfile = async (req, res) => {
@@ -50,6 +55,7 @@ exports.changeUserProfile = async (req, res) => {
       });
     }
   } else {
+    console.log(req.body);
     UserProfile.update(
       {
         current_location: req.body.current_location,
