@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./app/routes/auth.routes");
 const jobRoutes = require("./app/routes/job.routes");
+const userProfileRoutes = require("./app/routes/user_profile.routes");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api", jobRoutes);
+app.use("/api/profile", userProfileRoutes);
 const db = require("./app/models");
 // db.sequelize.sync({
 //   force: true,
