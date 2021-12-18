@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import companyLogo from "./company_logo.jpeg";
 import "./JobCard.css";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { applyForJob } from "../Helpers/JobHelper";
 const JobCard = (props) => {
-  console.log(props.id);
+  const [appliedAlready, setAppliedAlready] = useState(0);
+  console.log(props.usecase);
   let history = useHistory();
   let path_to_redirect = `/`;
-  const applyForJob = () => {
-    path_to_redirect = `/job/${props.job_id}/apply_for_job`;
-    history.push(path_to_redirect);
+  const applyJobAsUser = () => {
+    console.log(`job id : ${props.job_id}`);
+    applyForJob({ job_id: props.job_id }).then((data) => {
+      if (data.status === 200) {
+        setAppliedAlready(1);
+      }
+    });
+    // path_to_redirect = `/job/${props.job_id}/apply_for_job`;
+    // history.push(path_to_redirect);
   };
   const getApplicantsOfJob = () => {
     console.log(props.job_id);
@@ -30,12 +38,16 @@ const JobCard = (props) => {
         {props.usecase === "application_listing" ? (
           <h6>props.status</h6>
         ) : props.usecase === "user_listing" ? (
-          <Button
-            className="btn btn-primary apply-button"
-            onClick={applyForJob}
-          >
-            Apply
-          </Button>
+          appliedAlready ? (
+            <p>Applied</p>
+          ) : (
+            <Button
+              className="btn btn-primary apply-button"
+              onClick={applyJobAsUser}
+            >
+              Apply
+            </Button>
+          )
         ) : props.usecase === "recuiter_dashboard_listing" ? (
           <Button
             className="btn btn-primary apply-button"

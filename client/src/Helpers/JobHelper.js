@@ -47,3 +47,23 @@ export const createJob = (job) => {
       console.log(err);
     });
 };
+
+export const applyForJob = (details) => {
+  console.log(details);
+  return fetch(`http://localhost:3000/api/job/apply`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(details),
+  })
+    .then((response) => {
+      console.log("got no erorr");
+      return response;
+    })
+    .catch((err) => {
+      console.log("got erorr");
+      console.log(err);
+    });
+};

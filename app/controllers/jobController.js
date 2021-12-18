@@ -58,9 +58,12 @@ exports.getAllJobs = async (req, res) => {
   return res.json(jobs);
 };
 exports.applyForJob = async (req, res) => {
-  console.log(req.body.job_id);
-  console.log(req.userId);
-  if (typeof req.body.job_id === "undefined" || !req.userId) {
+  console.log(`job id : ${req.body.job_id}`);
+  console.log(`user id : ${req.userId}`);
+  if (
+    typeof req.body.job_id === "undefined" ||
+    typeof req.userId === "undefined"
+  ) {
     {
       res.status(400).send({
         msg: "Invalid request",

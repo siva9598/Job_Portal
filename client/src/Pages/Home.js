@@ -49,9 +49,11 @@ const Home = () => {
           {jobs.map((job, index) => {
             return (
               <JobCard
+                job_id={index}
                 position={jobs[index].position}
                 location={jobs[index].location}
                 no_of_applicants={jobs[index].no_of_applicants}
+                usecase="user_listing"
               />
             );
           })}
