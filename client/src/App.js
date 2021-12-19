@@ -14,6 +14,7 @@ import RecuiterSignup from "./Pages/RecuiterSignup";
 import RecuiterAddJob from "./Pages/RecuiterAddJob";
 import ApplicantsOfJob from "./Pages/ApplicantsOfJob";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

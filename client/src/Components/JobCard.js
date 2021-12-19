@@ -36,7 +36,7 @@ const JobCard = (props) => {
           <h6>{props.no_of_applicants}</h6>
         </div>
         {props.usecase === "application_listing" ? (
-          <h6>props.status</h6>
+          <h6>{props.status}</h6>
         ) : props.usecase === "user_listing" ? (
           appliedAlready ? (
             <p>Applied</p>

@@ -50,9 +50,13 @@ const RecuiterSignup = ({}) => {
               method="POST"
             >
               <label htmlFor="company_name">Company Name</label>
-              <input {...register("company_name")} />
+              <input {...register("company_name")} className="form-control" />
               <label htmlFor="company_email">Company Email</label>
-              <input type="company_email" {...register("company_email")} />
+              <input
+                type="company_email"
+                {...register("company_email")}
+                className="form-control"
+              />
               <button type="submit">Submit</button>
             </form>
             <div class="mt-6">

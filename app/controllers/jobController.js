@@ -1,5 +1,7 @@
 const db = require("../models");
 const Job = db.job;
+const User = db.user;
+const UserProfile = db.user_profile;
 const Application = db.application;
 
 exports.createJob = async (req, res) => {
@@ -89,7 +91,7 @@ exports.getAllApplicants = async (req, res) => {
       msg: "Invalid request",
     });
   } else {
-    const applicants = await Application.findOne({
+    const applicants = await Application.findAll({
       where: { jobId: req.query.job_id },
     });
     return res.json(applicants);
@@ -103,3 +105,44 @@ exports.getAllJobsForRecuiter = async (req, res) => {
   });
   return res.json(jobs);
 };
+
+exports.getAllApplicationsOfUser = async (req, res) => {
+  console.log(req.recuiterId);
+  const applications = await Application.findAll({
+    where: { userId: req.userId },
+  });
+  return res.json(applications);
+};
+
+exports.getAllUserProfilesThatAppliedForJob = async (req, res) => {
+  if (!req.query.job_id) {
+    res.status(400).send({
+      msg: "Invalid request",
+    });
+  } else {
+    console.log("im in getAllUserProfilesThatAppliedForJob");
+    const applied_users = await Application.findAll({
+      attributes: ["id", "status"],
+      where: { jobId: req.query.job_id },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "username"],
+          include: [UserProfile],
+        },
+      ],
+    });
+    console.log(applied_users);
+    return res.json(applied_users);
+  }
+};
+// User.findAll({
+//   include: [
+//     {
+//       model: Team,
+//       include: [
+//         Folder
+//       ]
+//     }
+//   ]
+// });

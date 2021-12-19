@@ -42,11 +42,11 @@ const RecuiterAddJob = () => {
             method="POST"
           >
             <label htmlFor="location">Location</label>
-            <input {...register("location")} />
+            <input {...register("location")} className="form-control" />
             <label htmlFor="position">Position</label>
-            <input {...register("position")} />
+            <input {...register("position")} className="form-control" />
             <label htmlFor="requirements">Requirements</label>
-            <textarea {...register("requirements")} />
+            <textarea {...register("requirements")} className="form-control" />
             {/* <input {...register("requirements")} /> */}
             <button type="submit">Submit</button>
           </form>

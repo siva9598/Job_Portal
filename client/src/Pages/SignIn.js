@@ -45,9 +45,13 @@ const Signin = ({}) => {
               method="POST"
             >
               <label htmlFor="email">Email</label>
-              <input {...register("email")} />
+              <input {...register("email")} className="form-control" />
               <label htmlFor="password">Password</label>
-              <input type="password" {...register("password")} />
+              <input
+                type="password"
+                {...register("password")}
+                className="form-control"
+              />
               <button type="submit">Submit</button>
             </form>
             <div class="mt-6">

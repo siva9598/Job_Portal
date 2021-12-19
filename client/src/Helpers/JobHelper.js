@@ -67,3 +67,37 @@ export const applyForJob = (details) => {
       console.log(err);
     });
 };
+
+export const getAllUserApplications = () => {
+  return fetch(`http://localhost:3000/api/user/applications`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "content-type": "application/json",
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const getAllUserProfilesForJob = (job_id) => {
+  return fetch(
+    `http://localhost:3000/api/job/applicant_profiles?job_id=${job_id}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "content-type": "application/json",
+      },
+    }
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

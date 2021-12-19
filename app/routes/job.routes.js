@@ -32,4 +32,16 @@ router.get(
   verifyRecuiter,
   controller.getAllJobsForRecuiter
 );
+router.get(
+  "/user/applications",
+  auth.verifyToken,
+  controller.getAllApplicationsOfUser
+);
+router.get(
+  "/job/applicant_profiles",
+  auth.verifyToken,
+  verifyRecuiter,
+  controller.getAllUserProfilesThatAppliedForJob
+);
+
 module.exports = router;
