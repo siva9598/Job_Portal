@@ -47,13 +47,17 @@ const Signup = () => {
               method="POST"
             >
               <label htmlFor="username">Username</label>
-              <input {...register("username")} />
+              <input {...register("username")} className="form-control" />
               <label htmlFor="email">Email</label>
-              <input {...register("email")} />
+              <input {...register("email")} className="form-control" />
               <label htmlFor="phone_number">Phone number</label>
-              <input {...register("phone_number")} />
+              <input {...register("phone_number")} className="form-control" />
               <label htmlFor="password">Password</label>
-              <input type="password" {...register("password")} />
+              <input
+                type="password"
+                {...register("password")}
+                className="form-control"
+              />
               <button type="submit">Submit</button>
             </form>
             <div class="mt-6">

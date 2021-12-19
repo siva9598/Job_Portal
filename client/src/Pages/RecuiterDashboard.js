@@ -33,7 +33,7 @@ const RecuiterDashboard = () => {
         {recuiterJobs.map((job, index) => {
           return (
             <JobCard
-              job_id={index}
+              job_id={recuiterJobs[index].id}
               position={recuiterJobs[index].position}
               location={recuiterJobs[index].location}
               no_of_applicants={recuiterJobs[index].no_of_applicants}
