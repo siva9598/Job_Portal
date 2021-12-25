@@ -5,7 +5,8 @@ import "./Base.css";
 const Base = ({ title = "My Title", children }) => {
   return (
     <div className="base-container">
-      <div>{children}</div>
+      {/* <div className="base-container" style={{ height: "100vh", width: "100vw" }}></div> */}
+      <div className="children">{children}</div>
     </div>
   );
 };

@@ -4,7 +4,13 @@
   border-color: black;
   border-style: solid;
   margin-bottom: 5px;
-  background: greenyellow;
+  border-radius: 1rem;
+  /* background: white; */
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
 }
 .job-logo {
   margin-left: 10px;
@@ -16,7 +22,11 @@
   justify-content: flex-start;
 }
 .job-details {
-  margin-left: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 100%;
+  /* background: rgb(231, 231, 240);
+  border: solid 1px; */
 }
 .apply-button {
   margin-top: 20px;

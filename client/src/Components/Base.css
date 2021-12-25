@@ -1,16 +1,26 @@
-body {
+/* body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
+} */
 
 .base-container {
+  height: 100vh;
+  width: 100vw;
   padding-left: 10%;
   padding-right: 10%;
-  /* background: greenyellow; */
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
 }
-#footer {
+/* #footer {
   background-color: #efefef;
-  flex: 0 0 50px; /*or just height:50px;*/
+  flex: 0 0 50px; 
   margin-top: auto;
+} */
+.children {
+  /* background-color: white; */
+  background-color: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
 }
