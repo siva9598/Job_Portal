@@ -33,13 +33,10 @@ const Signin = ({}) => {
   }, [isError, isSuccess]);
   return (
     <Base title="SignIn Page">
-      {/* <Fragment className="bg-white"> */}
       <div className="main-box">
         <div className="form-heading-box">
           <h2 className="form-heading">Sign in to your account</h2>
         </div>
-        {/* <div className="form-outer"> */}
-        {/* <div className=" form-outer bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10"> */}
         <div className="form-outer py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form
             className="user-form space-y-6"
@@ -66,7 +63,6 @@ const Signin = ({}) => {
           </div>
         </div>
       </div>
-      {/* </Fragment> */}
     </Base>
   );
 };

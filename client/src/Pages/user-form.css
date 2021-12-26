@@ -2,6 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .form-heading {
   margin-top: 20px;
