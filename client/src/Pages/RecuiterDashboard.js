@@ -30,7 +30,10 @@ const RecuiterDashboard = () => {
   return (
     <Base title="Homepage">
       <JobResultsBanner />
-      <div className="add-new-job" style={{ margin: "auto", width: "15%" }}>
+      <div
+        className="add-new-job"
+        style={{ margin: "auto", width: "15%", "margin-bottom": "20px" }}
+      >
         <Link
           to="/recuiter/add/job"
           className="add-new-job"
