@@ -7,8 +7,10 @@ import {
   recuiterSelector,
   clearState,
 } from "../Features/RecuiterSlice";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
+import Base from "../Components/Base";
+import "./user-form.css";
 const RecuiterSignup = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,48 +32,44 @@ const RecuiterSignup = ({}) => {
     }
     if (isSuccess) {
       dispatch(clearState());
+      toast.success("Company Attached Successfully");
       history.push("/recuiter/dashboard");
     }
   }, [isError, isSuccess]);
   return (
-    <Fragment>
-      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-          <h3></h3>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Attach your company details here
-          </h2>
+    <Base title="Recuiter Add Company Page">
+      <div className="main-box">
+        <div className="form-heading-box">
+          <h2 className="form-heading">Add you company details here</h2>
         </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form
-              className="space-y-6"
-              onSubmit={handleSubmit(onSubmit)}
-              method="POST"
-            >
-              <label htmlFor="company_name">Company Name</label>
-              <input {...register("company_name")} className="form-control" />
-              <label htmlFor="company_email">Company Email</label>
-              <input
-                type="company_email"
-                {...register("company_email")}
-                className="form-control"
-              />
-              <button type="submit">Submit</button>
-            </form>
-            <div class="mt-6">
-              <div class="relative">
-                <div class="relative flex justify-center text-sm">
-                  <span class="px-2 bg-white text-gray-500">
-                    Or <Link to="signup"> Signup</Link>
-                  </span>
-                </div>
-              </div>
-            </div>
+        <div className="form-outer py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form
+            className="user-form space-y-6"
+            onSubmit={handleSubmit(onSubmit)}
+            method="POST"
+          >
+            <label htmlFor="company_name">Company Name</label>
+            <input {...register("company_name")} className="form-control" />
+            <label htmlFor="company_email">Company Email</label>
+            <input
+              type="company_email"
+              {...register("company_email")}
+              className="form-control"
+            />
+            <button className="btn-submit" type="submit">
+              Submit
+            </button>
+          </form>
+          <Toaster />
+          <div className="form-redirect">
+            Or
+            <Link to="signup" className="alt-button">
+              Signup
+            </Link>
           </div>
         </div>
       </div>
-    </Fragment>
+    </Base>
   );
 };
 export default RecuiterSignup;
