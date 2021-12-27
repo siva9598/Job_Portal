@@ -5,6 +5,10 @@ import UserCard from "../Components/UserCard";
 
 const ApplicantsOfJob = () => {
   const [applicants, setApplicants] = useState([]);
+  //   const temp_a = [1,2,3]
+  //   const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  // let length = fruits.length;
+  let is_empty_list = false;
   let { job_id } = useParams();
   console.log(job_id);
   const fetchJobapplicants = () => {
@@ -24,25 +28,41 @@ const ApplicantsOfJob = () => {
   }, []);
   return (
     <div>
-      <div className="row">
-        {applicants.map((applicant, index) => {
-          return (
-            <UserCard
-              name={applicants[index].user.name}
-              current_salary={
-                applicants[index].user.user_profile.current_salary
-              }
-              current_role={applicants[index].user.user_profile.current_role}
-              total_work_experience_in_years={
-                applicants[index].user.user_profile
-                  .total_work_experience_in_years
-              }
-              resume_link={applicants[index].user.user_profile.resume_link}
-              github_link={applicants[index].user.user_profile.github_link}
-            />
-          );
-        })}
-      </div>
+      {applicants.length === 0 ? (
+        <div
+          styles={{
+            "background-color": `linear-gradient(to right top, #65dfc9, #6cdbeb)`,
+          }}
+        >
+          <h1
+            style={{
+              "text-align": "center",
+            }}
+          >
+            No applicants for job yet
+          </h1>
+        </div>
+      ) : (
+        <div className="row">
+          {applicants.map((applicant, index) => {
+            return (
+              <UserCard
+                name={applicants[index].user.name}
+                current_salary={
+                  applicants[index].user.user_profile.current_salary
+                }
+                current_role={applicants[index].user.user_profile.current_role}
+                total_work_experience_in_years={
+                  applicants[index].user.user_profile
+                    .total_work_experience_in_years
+                }
+                resume_link={applicants[index].user.user_profile.resume_link}
+                github_link={applicants[index].user.user_profile.github_link}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
