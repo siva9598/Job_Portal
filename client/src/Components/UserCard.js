@@ -10,16 +10,13 @@ const UserCard = (props) => {
   return (
     <div className="job-card-exterior">
       <div className="job-card">
-        {/* <div className="job-logo">
-          <img src={companyLogo} alt="company logo" height="90%" />
-        </div> */}
         <div className="job-details">
-          <h6>{props.name}</h6>
-          <h6>{props.current_salary}</h6>
-          <h6>{props.current_role}</h6>
-          <h6>{props.total_work_experience_in_years}</h6>
-          <h6>{props.resume_link}</h6>
-          <h6>{props.github_link}</h6>
+          <h6>Name: {props.name}</h6>
+          <h6>salary{props.current_salary}</h6>
+          <h6>role {props.current_role}</h6>
+          <h6>total work exp{props.total_work_experience_in_years}</h6>
+          <h6> resume: {props.resume_link}</h6>
+          <h6>github {props.github_link}</h6>
         </div>
 
         <h6>{props.status}</h6>
