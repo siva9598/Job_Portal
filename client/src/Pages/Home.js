@@ -21,35 +21,17 @@ const Home = () => {
   useEffect(() => {
     fetchAllJobs();
   }, []);
-
-  const x = {
-    id: 1,
-    status: "Open",
-    location: "Bangalore",
-    position: "SDET",
-    requirements: "Should have atleast 2 years of prior QA work experience",
-    no_of_applicants: 0,
-    createdAt: "2021-12-11T14:47:37.000Z",
-    updatedAt: "2021-12-11T14:47:37.000Z",
-    recuiterId: 1,
-  };
   return (
     <div>
       <TopNav />
       <Base title="Homepage">
-        <JobResultsBanner />
-        {/* <JobCard position="SDET1" location="Banglaore" no_of_applicants="1" />
-        <JobCard
-          position={jobs[0].position}
-          location="Banglaore"
-          no_of_applicants="1"
-        /> */}
+        <JobResultsBanner number_of_jobs={jobs.length} />
 
         <div className="row">
           {jobs.map((job, index) => {
             return (
               <JobCard
-                job_id={index}
+                job_id={jobs[index].id}
                 position={jobs[index].position}
                 location={jobs[index].location}
                 no_of_applicants={jobs[index].no_of_applicants}

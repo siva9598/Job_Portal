@@ -24,9 +24,8 @@ const Applications = () => {
   return (
     <div>
       <TopNav />
-      <Base title="Homepage">
+      <Base title="Applications">
         <JobResultsBanner />
-
         <div className="row">
           {applications.map((application, index) => {
             return (

@@ -80,7 +80,6 @@ exports.applyForJob = async (req, res) => {
     })
       .then(() => res.status(200).send("Job application created successfully"))
       .catch((err) => {
-        console.log(err.errors);
         res.status(400).send(err.message);
       });
   }

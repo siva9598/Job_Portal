@@ -1,4 +1,4 @@
-.job-card-exterior {
+.user-card-exterior {
   padding-top: 20px;
   padding-bottom: 20px;
   border-color: black;
@@ -12,23 +12,23 @@
     rgba(255, 255, 255, 0.3)
   );
 }
-.job-logo {
+/* .job-logo {
   margin-left: 10px;
-}
-.job-card {
+} */
+.user-card {
   /* margin-top: 2%; */
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
-.job-details {
+.user-details {
   margin-left: 5%;
   margin-right: 5%;
   width: 100%;
   /* background: rgb(231, 231, 240);
-  border: solid 1px; */
+    border: solid 1px; */
 }
-.apply-button {
+.shortlist-button {
   margin-top: 20px;
   margin-left: auto;
   margin-right: 10px;

@@ -1,9 +1,10 @@
 import React from "react";
-
-const JobResultsBanner = () => {
+import "./JobResultsBanner.css";
+const JobResultsBanner = (props) => {
+  const number_of_jobs_to_show = props.number_of_jobs || 0;
   return (
-    <div>
-      <h3>Found 10 Jobs that matched the criteria</h3>
+    <div className="banner">
+      <h3>Found {number_of_jobs_to_show} Jobs that matched the criteria</h3>
     </div>
   );
 };
