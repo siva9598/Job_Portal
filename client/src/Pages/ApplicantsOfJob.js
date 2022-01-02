@@ -49,6 +49,7 @@ const ApplicantsOfJob = () => {
             {applicants.map((applicant, index) => {
               return (
                 <UserCard
+                  application_id={applicants[index].id}
                   name={applicants[index].user.name}
                   current_salary={
                     applicants[index].user.user_profile.current_salary

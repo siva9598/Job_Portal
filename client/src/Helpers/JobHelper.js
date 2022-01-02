@@ -101,3 +101,22 @@ export const getAllUserProfilesForJob = (job_id) => {
       console.log(err);
     });
 };
+export const patchApplicationStatus = (details) => {
+  console.log(details);
+  return fetch(`http://localhost:3000/api/application/change_status`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(details),
+  })
+    .then((response) => {
+      console.log("got no erorr");
+      return response;
+    })
+    .catch((err) => {
+      console.log("got erorr");
+      console.log(err);
+    });
+};

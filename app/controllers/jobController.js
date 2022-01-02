@@ -135,13 +135,28 @@ exports.getAllUserProfilesThatAppliedForJob = async (req, res) => {
     return res.json(applied_users);
   }
 };
-// User.findAll({
-//   include: [
-//     {
-//       model: Team,
-//       include: [
-//         Folder
-//       ]
-//     }
-//   ]
-// });
+exports.changeApplicationstatus = async (req, res) => {
+  console.log(req.body.application_id);
+  console.log(req.body.status);
+
+  if (typeof req.body.application_id === "undefined" || !req.body.status) {
+    {
+      res.status(400).send({
+        msg: "Please send the valid data",
+      });
+    }
+  } else {
+    Application.update(
+      { status: req.body.status },
+      {
+        where: {
+          id: req.body.application_id,
+        },
+      }
+    )
+      .then(() => res.status(200).send("Application updated successfully"))
+      .catch((err) => {
+        res.status(400).send(err.message);
+      });
+  }
+};

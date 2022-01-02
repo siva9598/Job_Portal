@@ -43,5 +43,11 @@ router.get(
   verifyRecuiter,
   controller.getAllUserProfilesThatAppliedForJob
 );
+router.patch(
+  "/application/change_status",
+  auth.verifyToken,
+  verifyRecuiter,
+  controller.changeApplicationstatus
+);
 
 module.exports = router;

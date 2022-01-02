@@ -3,10 +3,36 @@ import companyLogo from "./company_logo.jpeg";
 import "./JobCard.css";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { applyForJob } from "../Helpers/JobHelper";
+import { patchApplicationStatus } from "../Helpers/JobHelper";
 import "./UserCard.css";
 const UserCard = (props) => {
-  const [appliedAlready, setAppliedAlready] = useState(0);
+  const shortlistApplication = () => {
+    patchApplicationStatus({
+      application_id: props.application_id,
+      status: "Shortlisted",
+    }).then((data) => {
+      if (data.status === 200) {
+        //setShortlistedAlready(1);
+        setJobStatus("Shortlisted");
+      }
+    });
+  };
+  const rejectApplication = () => {
+    patchApplicationStatus({
+      application_id: props.application_id,
+      status: "Rejected",
+    }).then((data) => {
+      if (data.status === 200) {
+        //setRejectedAlready(1);
+        setJobStatus("Rejected");
+      }
+    });
+  };
+
+  const [shortlistedAlready, setShortlistedAlready] = useState(0);
+  const [rejectedAlready, setRejectedAlready] = useState(0);
+  const [JobStatus, setJobStatus] = useState(props.status);
+  // const [jobStatus, setJobStatus] = useState(props.status);
   return (
     <div className="user-card-exterior">
       <div className="user-card">
@@ -18,19 +44,31 @@ const UserCard = (props) => {
           <h6> Resume: {props.resume_link}</h6>
           <h6>Github: {props.github_link}</h6>
         </div>
-        <Button
-          className="btn btn-primary apply-button"
-          //   onClick={applyJobAsUser}
-        >
-          shortlist
-        </Button>
-        <Button
-          className="btn btn-primary apply-button"
-          //   onClick={applyJobAsUser}
-        >
-          reject
-        </Button>
-        {/* <h6>{props.status}</h6> */}
+        {/* {props.status === "Applied" ? ( */}
+        {JobStatus === "Applied" ? (
+          <div>
+            <Button
+              className="btn btn-primary apply-button"
+              onClick={shortlistApplication}
+            >
+              shortlist
+            </Button>
+            <Button
+              className="btn btn-danger apply-button"
+              onClick={rejectApplication}
+            >
+              reject
+            </Button>
+          </div>
+        ) : // ) : shortlistedAlready === 1 ? (
+        JobStatus === "Shortlisted" ? (
+          <h6>Shortlisted</h6>
+        ) : // ) : props.status === "Rejected" ? (
+        JobStatus === "Rejected" ? (
+          <h6>Rejected</h6>
+        ) : (
+          <h6>default</h6>
+        )}
       </div>
     </div>
   );
